@@ -1,0 +1,222 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:site_name",
+ "creation": "2025-11-23 00:00:00.000000",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "tenant_name",
+  "site_name",
+  "primary_domain",
+  "section_break_plan",
+  "plan",
+  "status",
+  "column_break_status",
+  "provisioning_state",
+  "last_provisioned_at",
+  "provisioning_log",
+  "section_break_billing",
+  "billing_customer",
+  "billing_subscription_id",
+  "billing_portal_url",
+    "billing_email",
+    "stripe_customer_id",
+    "stripe_subscription_id",
+    "stripe_price_id",
+    "stripe_status",
+    "trial_ends_on",
+  "section_break_operations",
+  "enforce_isolation",
+  "queue_group",
+  "max_background_workers",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "tenant_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Tenant Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "site_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Site Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "primary_domain",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "Primary Domain"
+  },
+  {
+   "fieldname": "section_break_plan",
+   "fieldtype": "Section Break",
+   "label": "Plan & Status"
+  },
+  {
+   "default": "Growth",
+   "fieldname": "plan",
+   "fieldtype": "Select",
+   "label": "Plan",
+   "options": "Free\nGrowth\nScale\nEnterprise",
+   "reqd": 1
+  },
+  {
+   "default": "Pending Activation",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending Activation\nActive\nSuspended\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_status",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "provisioning_state",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Provisioning State",
+   "options": "Requested\nProvisioning\nReady\nFailed"
+  },
+  {
+   "fieldname": "last_provisioned_at",
+   "fieldtype": "Datetime",
+   "label": "Last Provisioned At"
+  },
+  {
+   "fieldname": "provisioning_log",
+   "fieldtype": "Small Text",
+   "label": "Provisioning Notes"
+  },
+  {
+   "fieldname": "section_break_billing",
+   "fieldtype": "Section Break",
+   "label": "Billing"
+  },
+  {
+   "fieldname": "billing_customer",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Billing Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "billing_subscription_id",
+   "fieldtype": "Data",
+   "label": "Subscription ID"
+  },
+  {
+   "fieldname": "billing_portal_url",
+   "fieldtype": "Data",
+   "label": "Billing Portal URL"
+  },
+  {
+   "fieldname": "billing_email",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "Billing Email"
+  },
+  {
+   "fieldname": "stripe_customer_id",
+   "fieldtype": "Data",
+   "label": "Stripe Customer ID"
+  },
+  {
+   "fieldname": "stripe_subscription_id",
+   "fieldtype": "Data",
+   "label": "Stripe Subscription ID"
+  },
+  {
+   "fieldname": "stripe_price_id",
+   "fieldtype": "Data",
+   "label": "Stripe Price ID"
+  },
+  {
+   "fieldname": "stripe_status",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Stripe Status",
+   "options": "trialing\nactive\npast_due\nunpaid\ncanceled\nincomplete\nincomplete_expired"
+  },
+  {
+   "fieldname": "trial_ends_on",
+   "fieldtype": "Date",
+   "label": "Trial Ends On"
+  },
+  {
+   "fieldname": "section_break_operations",
+   "fieldtype": "Section Break",
+   "label": "Operations"
+  },
+  {
+   "default": "0",
+   "fieldname": "enforce_isolation",
+   "fieldtype": "Check",
+   "label": "Enforce Resource Isolation"
+  },
+  {
+   "fieldname": "queue_group",
+   "fieldtype": "Data",
+   "label": "Queue Group"
+  },
+  {
+   "default": "0",
+   "fieldname": "max_background_workers",
+   "fieldtype": "Int",
+   "label": "Max Background Workers"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Internal Notes"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2025-11-23 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "NoSlag Multi Tenancy",
+ "name": "NoSlag Tenant",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Support Team",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
