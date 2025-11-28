@@ -19014,8 +19014,8 @@ msgid "Forum URL"
 msgstr "آدرس انجمن"
 
 #: erpnext/setup/install.py:200
-msgid "Frappe School"
-msgstr "مدرسه Frappe"
+msgid "Noslag Academy"
+msgstr "Noslag Academy"
 
 #. Title of an incoterm
 #: erpnext/setup/doctype/incoterm/incoterms.csv:4

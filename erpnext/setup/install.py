@@ -197,9 +197,9 @@ def add_standard_navbar_items():
 			"is_standard": 1,
 		},
 		{
-			"item_label": _("Frappe School"),
+			"item_label": _("Noslag Academy"),
 			"item_type": "Route",
-			"route": "https://frappe.io/school?utm_source=in_app",
+			"route": "https://noslag.com/academy?utm_source=in_app",
 			"is_standard": 1,
 		},
 		{

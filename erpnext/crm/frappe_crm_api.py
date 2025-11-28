@@ -13,7 +13,7 @@ def create_custom_fields_for_frappe_crm():
 			{
 				"fieldname": "crm_deal",
 				"fieldtype": "Data",
-				"label": "Frappe CRM Deal",
+				"label": "Noslag CRM Deal",
 				"insert_after": "party_name",
 			}
 		],
@@ -21,7 +21,7 @@ def create_custom_fields_for_frappe_crm():
 			{
 				"fieldname": "crm_deal",
 				"fieldtype": "Data",
-				"label": "Frappe CRM Deal",
+				"label": "Noslag CRM Deal",
 				"insert_after": "prospect_name",
 			}
 		],
@@ -167,5 +167,5 @@ def create_customer(customer_data=None):
 		create_address("Customer", customer_name, customer_data.get("address"))
 		return customer_name
 	except Exception:
-		frappe.log_error(frappe.get_traceback(), "Error while creating customer against Frappe CRM Deal")
+		frappe.log_error(frappe.get_traceback(), "Error while creating customer against Noslag CRM Deal")
 		pass

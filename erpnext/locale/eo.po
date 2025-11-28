@@ -18995,8 +18995,8 @@ msgid "Forum URL"
 msgstr "crwdns134490:0crwdne134490:0"
 
 #: erpnext/setup/install.py:200
-msgid "Frappe School"
-msgstr "crwdns161098:0crwdne161098:0"
+msgid "Noslag Academy"
+msgstr "Noslag Academy"
 
 #. Title of an incoterm
 #: erpnext/setup/doctype/incoterm/incoterms.csv:4
