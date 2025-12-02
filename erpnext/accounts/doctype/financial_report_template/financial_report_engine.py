@@ -11,7 +11,10 @@ from typing import Any, Union
 
 import frappe
 from frappe import _
-from frappe.database.operator_map import OPERATOR_MAP
+try:
+	from frappe.database.operator_map import OPERATOR_MAP
+except ImportError:
+	from frappe.database.query import OPERATOR_MAP  # type: ignore
 from frappe.query_builder import Case
 from frappe.query_builder.functions import Sum
 from frappe.utils import cstr, date_diff, flt, getdate

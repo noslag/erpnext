@@ -120,19 +120,28 @@ def create_print_setting_custom_fields():
 
 
 def create_marketgin_campagin_custom_fields():
-	create_custom_fields(
-		{
-			"UTM Campaign": [
-				{
-					"label": _("Messaging CRM Campagin"),
-					"fieldname": "crm_campaign",
-					"fieldtype": "Link",
-					"options": "Campaign",
-					"insert_after": "campaign_decription",
-				},
-			]
-		}
-	)
+	if not frappe.db.exists("DocType", "UTM Campaign"):
+		# The DocType may not be present in trimmed distributions; skip gracefully.
+		return
+
+	try:
+		create_custom_fields(
+			{
+				"UTM Campaign": [
+					{
+						"label": _("Messaging CRM Campagin"),
+						"fieldname": "crm_campaign",
+						"fieldtype": "Link",
+						"options": "Campaign",
+						"insert_after": "campaign_description",
+					},
+				]
+			}
+		)
+	except frappe.LinkValidationError:
+		frappe.logger("erpnext_install").warning(
+			"Skipping marketing custom fields because DocType 'UTM Campaign' is unavailable."
+		)
 
 
 def create_default_success_action():

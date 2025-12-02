@@ -18,6 +18,8 @@ dependencies = [
     "googlemaps~=4.10.0",
     "plaid-python~=7.2.1",
     "python-youtube~=0.9.7",
+    "requests>=2.31.0",
+    "ebay-oauth-python-client>=1.2.0",
 
     # Not used directly - required by PyQRCode for PNG generation
     "pypng~=0.20220715.0",

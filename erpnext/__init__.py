@@ -6,6 +6,15 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils.user import is_website_user
 
+if not hasattr(frappe, "get_single_value"):
+	def _get_single_value(doctype: str, fieldname: str, cache: bool = True):
+		return frappe.db.get_single_value(doctype, fieldname, cache=cache)
+
+	frappe.get_single_value = _get_single_value  # type: ignore[attr-defined]
+
+if not hasattr(frappe, "in_test"):
+	frappe.in_test = False  # type: ignore[attr-defined]
+
 __version__ = "16.0.0-dev"
 
 

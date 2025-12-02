@@ -9,7 +9,15 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import cint
-from frappe.utils.data import get_system_timezone
+
+try:
+	from frappe.utils.data import get_system_timezone
+except ImportError:
+	try:
+		from frappe.utils import get_system_timezone  # type: ignore
+	except ImportError:
+		def get_system_timezone() -> str:
+			return frappe.db.get_system_setting("time_zone") or frappe.get_system_settings().get("time_zone", "UTC")
 from pyyoutube import Api
 
 

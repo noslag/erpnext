@@ -4,7 +4,20 @@
 
 import frappe
 from frappe import _
-from frappe.core.doctype.installed_applications.installed_applications import get_setup_wizard_completed_apps
+
+try:
+	from frappe.core.doctype.installed_applications.installed_applications import (
+		get_setup_wizard_completed_apps as _get_setup_wizard_completed_apps,
+	)
+except ImportError:
+	_get_setup_wizard_completed_apps = None
+
+
+def get_setup_wizard_completed_apps():
+	if _get_setup_wizard_completed_apps:
+		return _get_setup_wizard_completed_apps()
+
+	return []
 
 import erpnext
 

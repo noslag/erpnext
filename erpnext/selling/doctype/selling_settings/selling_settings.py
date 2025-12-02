@@ -10,6 +10,17 @@ from frappe.custom.doctype.property_setter.property_setter import make_property_
 from frappe.model.document import Document
 from frappe.utils import cint
 
+try:
+	from frappe import get_single_value as _frappe_get_single_value
+except ImportError:
+	_frappe_get_single_value = None
+
+
+def _get_single_value(doctype: str, fieldname: str):
+	if _frappe_get_single_value:
+		return _frappe_get_single_value(doctype, fieldname)
+	return frappe.db.get_single_value(doctype, fieldname)
+
 
 class SellingSettings(Document):
 	# begin: auto-generated types
@@ -81,7 +92,7 @@ class SellingSettings(Document):
 		if (
 			self.fallback_to_default_price_list
 			and self.has_value_changed("fallback_to_default_price_list")
-			and frappe.get_single_value("Stock Settings", "auto_insert_price_list_rate_if_missing")
+			and _get_single_value("Stock Settings", "auto_insert_price_list_rate_if_missing")
 		):
 			stock_meta = frappe.get_meta("Stock Settings")
 			frappe.msgprint(

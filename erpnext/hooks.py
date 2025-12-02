@@ -421,19 +421,19 @@ scheduler_events = {
 	},
 	"hourly": [
 		"erpnext.projects.doctype.project.project.hourly_reminder",
+		"erpnext.erpnext_integrations.ebay.sync.sync_orders",
 	],
-	"hourly_long": [],
-	"hourly_maintenance": [
+	"hourly_long": [
 		"erpnext.stock.doctype.repost_item_valuation.repost_item_valuation.repost_entries",
 		"erpnext.utilities.bulk_transaction.retry",
 		"erpnext.projects.doctype.project.project.collect_project_status",
 		"erpnext.projects.doctype.project.project.project_status_update_reminder",
 		"erpnext.erpnext_integrations.doctype.plaid_settings.plaid_settings.automatic_synchronization",
 		"erpnext.utilities.doctype.video.video.update_youtube_data",
+		"erpnext.erpnext_integrations.ebay.sync.sync_listings",
 	],
 	"daily": [],
-	"daily_long": [],
-	"daily_maintenance": [
+	"daily_long": [
 		"erpnext.support.doctype.issue.issue.auto_close_tickets",
 		"erpnext.crm.doctype.opportunity.opportunity.auto_close_opportunity",
 		"erpnext.controllers.accounts_controller.update_invoice_status",

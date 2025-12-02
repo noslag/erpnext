@@ -2,11 +2,14 @@ import frappe
 
 
 def execute():
-	warehouses = frappe.get_single_value(
-		"Manufacturing Settings",
-		["default_wip_warehouse", "default_fg_warehouse", "default_scrap_warehouse"],
-		as_dict=True,
-	)
+	fields = [
+		"default_wip_warehouse",
+		"default_fg_warehouse",
+		"default_scrap_warehouse",
+	]
+
+	settings = frappe.get_single("Manufacturing Settings")
+	warehouses = {field: settings.get(field) for field in fields}
 
 	for name, warehouse in warehouses.items():
 		if warehouse:

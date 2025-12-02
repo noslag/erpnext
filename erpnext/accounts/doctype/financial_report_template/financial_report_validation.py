@@ -11,8 +11,19 @@ from typing import Any, ClassVar
 
 import frappe
 from frappe import _
-from frappe.database.operator_map import OPERATOR_MAP
-from frappe.database.query import SQLFunctionParser
+try:
+	from frappe.database.operator_map import OPERATOR_MAP
+except ImportError:
+	from frappe.database.query import OPERATOR_MAP  # type: ignore
+
+try:
+	from frappe.database.query import SQLFunctionParser
+except ImportError:
+	class SQLFunctionParser:  # type: ignore
+		"""Fallback stub for legacy Frappe builds where SQLFunctionParser is unavailable."""
+
+		def __init__(self, *args, **kwargs):
+			pass
 
 
 @dataclass

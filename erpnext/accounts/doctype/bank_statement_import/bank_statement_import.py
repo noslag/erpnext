@@ -84,7 +84,12 @@ class BankStatementImport(DataImport):
 		if "Bank Account" not in json.dumps(preview["columns"]):
 			frappe.throw(_("Please add the Bank Account column"))
 
-		from frappe.utils.background_jobs import is_job_enqueued
+		try:
+			from frappe.utils.background_jobs import is_job_enqueued
+		except ImportError:
+			def is_job_enqueued(*_, **__):
+				return False
+
 		from frappe.utils.scheduler import is_scheduler_inactive
 
 		run_now = frappe.in_test or frappe.conf.developer_mode

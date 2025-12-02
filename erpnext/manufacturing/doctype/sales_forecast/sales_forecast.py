@@ -6,7 +6,12 @@ import pandas as pd
 from frappe import _
 from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
-from frappe.query_builder.functions import DateFormat, Sum, YearWeek
+from frappe.query_builder.functions import CustomFunction, DateFormat, Sum
+
+try:
+	from frappe.query_builder.functions import YearWeek
+except ImportError:
+	YearWeek = CustomFunction("YEARWEEK", ["date", "mode"])  # type: ignore
 from frappe.utils import add_to_date, cint, date_diff, flt
 from frappe.utils.nestedset import get_descendants_of
 

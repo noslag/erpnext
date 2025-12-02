@@ -8,7 +8,36 @@ from frappe import _, qb
 from frappe.desk.notifications import clear_notifications
 from frappe.model.document import Document
 from frappe.utils import cint, comma_and, create_batch, get_link_to_form
-from frappe.utils.background_jobs import get_job, is_job_enqueued
+try:
+	from frappe.utils.background_jobs import get_job
+except ImportError:
+	from rq.job import Job
+
+	try:
+		from frappe.utils.background_jobs import get_redis_conn
+	except ImportError:  # pragma: no cover - legacy stacks may miss this too
+		get_redis_conn = None  # type: ignore
+
+	class _FallbackJob:
+		def __init__(self, job_id):
+			self._job_id = job_id
+
+		def get_id(self):
+			return self._job_id
+
+	def get_job(job_id):  # type: ignore
+		if job_id and get_redis_conn:
+			try:
+				return Job.fetch(job_id, connection=get_redis_conn())
+			except Exception:
+				pass
+		return _FallbackJob(job_id)
+
+try:
+	from frappe.utils.background_jobs import is_job_enqueued
+except ImportError:
+	def is_job_enqueued(*_, **__):
+		return False
 from frappe.utils.caching import request_cache
 
 LEDGER_ENTRY_DOCTYPES = frozenset(

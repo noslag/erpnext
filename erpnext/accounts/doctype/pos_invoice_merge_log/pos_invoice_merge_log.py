@@ -10,7 +10,14 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.model.mapper import map_child_doc, map_doc
 from frappe.utils import cint, flt, get_time, getdate, nowdate, nowtime
-from frappe.utils.background_jobs import enqueue, is_job_enqueued
+
+try:
+	from frappe.utils.background_jobs import enqueue, is_job_enqueued
+except ImportError:
+	from frappe.utils.background_jobs import enqueue
+
+	def is_job_enqueued(*_, **__):
+		return False
 from frappe.utils.scheduler import is_scheduler_inactive
 
 from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (

@@ -1,7 +1,6 @@
 import frappe
-from frappe.model.naming import _generate_random_string
 from frappe.query_builder import Case
-from frappe.utils import now_datetime
+from frappe.utils import now_datetime, random_string
 
 from erpnext.accounts.utils import get_advance_payment_doctypes
 
@@ -114,7 +113,7 @@ def bulk_insert_advance_entries(entries):
 
 def get_values(user, now, entry):
 	return (
-		_generate_random_string(10),
+		random_string(10),
 		now,
 		now,
 		user,

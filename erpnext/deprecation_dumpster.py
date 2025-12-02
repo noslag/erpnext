@@ -20,7 +20,25 @@ import re
 import sys
 import warnings
 
-from frappe.deprecation_dumpster import Color, _deprecated, colorize
+try:
+	from frappe.deprecation_dumpster import Color, _deprecated, colorize
+except ImportError:
+	class Color:
+		RED = ""
+		YELLOW = ""
+
+	def colorize(message, *_args, **_kwargs):
+		return message
+
+	def _deprecated(message, category=None, stacklevel=1):
+		def decorator(func):
+			def wrapper(*args, **kwargs):
+				warnings.warn(message, category or PendingDeprecationWarning, stacklevel=stacklevel)
+				return func(*args, **kwargs)
+
+			return wrapper
+
+		return decorator
 
 
 # we use Warning because DeprecationWarning has python default filters which would exclude them from showing

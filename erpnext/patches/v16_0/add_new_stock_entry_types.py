@@ -9,6 +9,7 @@ def execute():
 		"Subcontracting Return",
 	]:
 		if not frappe.db.exists("Stock Entry Type", stock_entry_type):
-			frappe.new_doc("Stock Entry Type", purpose=stock_entry_type, is_standard=1).insert(
-				set_name=stock_entry_type, ignore_permissions=True
-			)
+			doc = frappe.new_doc("Stock Entry Type")
+			doc.purpose = stock_entry_type
+			doc.is_standard = 1
+			doc.insert(set_name=stock_entry_type, ignore_permissions=True)

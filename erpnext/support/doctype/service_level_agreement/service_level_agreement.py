@@ -13,7 +13,6 @@ from frappe.utils import (
 	get_datetime,
 	get_datetime_str,
 	get_link_to_form,
-	get_system_timezone,
 	get_time,
 	get_weekdays,
 	getdate,
@@ -21,11 +20,47 @@ from frappe.utils import (
 	time_diff_in_seconds,
 	to_timedelta,
 )
-from frappe.utils.caching import redis_cache
 from frappe.utils.nestedset import get_ancestors_of
 from frappe.utils.safe_exec import get_safe_globals
 
 from erpnext.support.doctype.issue.issue import calculate_first_response_time, get_holidays
+
+try:
+	from frappe.utils import get_system_timezone as _frappe_get_system_timezone
+except ImportError:
+	_frappe_get_system_timezone = None
+
+
+try:
+	from frappe.utils.caching import redis_cache as _frappe_redis_cache
+except ImportError:
+	_frappe_redis_cache = None
+
+
+def redis_cache(*cache_args, **cache_kwargs):
+	"""Provide redis_cache decorator if frappe version doesn't expose it."""
+	if _frappe_redis_cache:
+		return _frappe_redis_cache(*cache_args, **cache_kwargs)
+
+	def decorator(fn):
+		return fn
+
+	return decorator
+
+
+def get_system_timezone():
+	"""Return system timezone even if frappe.utils doesn't expose helper (backward compatibility)."""
+	if _frappe_get_system_timezone:
+		return _frappe_get_system_timezone()
+
+	return frappe.db.get_single_value("System Settings", "time_zone") or "UTC"
+
+
+def _get_cache():
+	cache_attr = getattr(frappe, "cache", None)
+	if callable(cache_attr):
+		return cache_attr()
+	return cache_attr
 
 
 class ServiceLevelAgreement(Document):
@@ -475,7 +510,8 @@ def get_repeated(values):
 
 
 def get_documents_with_active_service_level_agreement():
-	sla_doctypes = frappe.cache.get_value("doctypes_with_active_sla")
+	cache = _get_cache()
+	sla_doctypes = cache.get_value("doctypes_with_active_sla") if cache else None
 
 	if sla_doctypes is None:
 		return set_documents_with_active_service_level_agreement()
@@ -488,7 +524,9 @@ def set_documents_with_active_service_level_agreement():
 		active = frozenset(
 			sla.document_type for sla in frappe.get_all("Service Level Agreement", fields=["document_type"])
 		)
-		frappe.cache.set_value("doctypes_with_active_sla", active)
+		cache = _get_cache()
+		if cache:
+			cache.set_value("doctypes_with_active_sla", active)
 	except (frappe.DoesNotExistError, frappe.db.TableMissingError):
 		# This happens during install / uninstall when wildcard hook for SLA intercepts some doc action.
 		# In both cases, the error can be safely ignored.

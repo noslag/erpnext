@@ -1,0 +1,158 @@
+{
+ "actions": [],
+ "autoname": "field:eBay Settings",
+ "creation": "2025-11-29 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "environment",
+  "default_marketplace_id",
+  "section_break_credentials",
+  "ru_name",
+  "client_id",
+  "client_secret",
+  "column_break_tokens",
+  "auth_scopes",
+  "state_token",
+  "refresh_token",
+  "access_token",
+  "access_token_expires_at",
+  "section_break_sync",
+  "order_sync_window_hours",
+  "listing_sync_window_hours",
+  "last_order_sync_at",
+  "last_listing_sync_at"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enabled"
+  },
+  {
+   "default": "production",
+   "fieldname": "environment",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Environment",
+   "options": "production\nsandbox"
+  },
+  {
+   "fieldname": "default_marketplace_id",
+   "fieldtype": "Data",
+   "label": "Default Marketplace ID"
+  },
+  {
+   "depends_on": "eval:doc.enabled",
+   "fieldname": "section_break_credentials",
+   "fieldtype": "Section Break",
+   "label": "Credentials"
+  },
+  {
+   "fieldname": "ru_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+    "label": "RuName / Redirect Identifier",
+    "read_only": 1,
+    "hidden": 1
+  },
+  {
+   "fieldname": "client_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+    "label": "Client ID",
+    "read_only": 1,
+    "hidden": 1
+  },
+  {
+   "fieldname": "client_secret",
+   "fieldtype": "Password",
+  "label": "Client Secret",
+  "read_only": 1,
+  "hidden": 1
+  },
+  {
+   "fieldname": "column_break_tokens",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "https://api.ebay.com/oauth/api_scope\nhttps://api.ebay.com/oauth/api_scope/sell.fulfillment\nhttps://api.ebay.com/oauth/api_scope/sell.inventory",
+   "fieldname": "auth_scopes",
+   "fieldtype": "Small Text",
+   "label": "Requested Scopes"
+  },
+  {
+   "fieldname": "state_token",
+   "fieldtype": "Data",
+   "label": "Last State Token",
+   "read_only": 1
+  },
+  {
+   "fieldname": "refresh_token",
+   "fieldtype": "Password",
+   "label": "Refresh Token"
+  },
+  {
+   "fieldname": "access_token",
+   "fieldtype": "Password",
+   "label": "Access Token"
+  },
+  {
+   "fieldname": "access_token_expires_at",
+   "fieldtype": "Datetime",
+   "label": "Access Token Expires At"
+  },
+  {
+   "fieldname": "section_break_sync",
+   "fieldtype": "Section Break",
+   "label": "Sync Defaults"
+  },
+  {
+   "default": "4",
+   "fieldname": "order_sync_window_hours",
+   "fieldtype": "Int",
+   "label": "Order Sync Lookback (hours)"
+  },
+  {
+   "default": "4",
+   "fieldname": "listing_sync_window_hours",
+   "fieldtype": "Int",
+   "label": "Listing Sync Lookback (hours)"
+  },
+  {
+   "fieldname": "last_order_sync_at",
+   "fieldtype": "Datetime",
+   "label": "Last Order Sync"
+  },
+  {
+   "fieldname": "last_listing_sync_at",
+   "fieldtype": "Datetime",
+   "label": "Last Listing Sync"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "module": "ERPNext Integrations",
+ "name": "eBay Settings",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

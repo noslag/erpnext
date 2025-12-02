@@ -4,7 +4,11 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils.background_jobs import is_job_enqueued
+try:
+	from frappe.utils.background_jobs import is_job_enqueued
+except ImportError:
+	def is_job_enqueued(*_, **__):
+		return False
 
 from erpnext.accounts.doctype.account.account import merge_account
 

@@ -12,7 +12,12 @@ from frappe import _, qb, throw
 from frappe.desk.reportview import build_match_conditions
 from frappe.model.meta import get_field_precision
 from frappe.query_builder import AliasedQuery, Case, Criterion, Field, Table
-from frappe.query_builder.functions import Count, IfNull, Max, Round, Sum
+from frappe.query_builder.functions import Count, IfNull, Max, Sum, CustomFunction
+
+try:
+	from frappe.query_builder.functions import Round
+except ImportError:
+	Round = CustomFunction("ROUND", ["value", "places"])  # type: ignore
 from frappe.query_builder.utils import DocType
 from frappe.utils import (
 	add_days,
