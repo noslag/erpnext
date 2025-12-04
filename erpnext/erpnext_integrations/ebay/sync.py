@@ -7,8 +7,6 @@ import frappe
 from .exceptions import EbayAPIError
 
 
-logger = frappe.logger("ebay_sync")
-
 SYNC_TYPE_ORDER = "order"
 SYNC_TYPE_LISTING = "listing"
 
@@ -88,9 +86,9 @@ def _update_sync_log(log_doc, *, status: str, response: dict | None):
 
 def _connector_ready(settings) -> bool:
 	if not settings.enabled:
-		logger.info("Skipping eBay sync: connector disabled on %s", frappe.local.site)
+		frappe.logger("ebay_sync").info("Skipping eBay sync: connector disabled on %s", frappe.local.site)
 		return False
 	if not settings.refresh_token:
-		logger.info("Skipping eBay sync: missing refresh token on %s", frappe.local.site)
+		frappe.logger("ebay_sync").info("Skipping eBay sync: missing refresh token on %s", frappe.local.site)
 		return False
 	return True

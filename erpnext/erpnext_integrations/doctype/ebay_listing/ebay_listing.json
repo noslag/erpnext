@@ -10,6 +10,9 @@
   "offer_id",
   "sku",
   "title",
+  "description",
+  "image_url",
+  "image_html",
   "status",
   "column_break_pricing",
   "price",
@@ -44,6 +47,23 @@
    "fieldname": "title",
    "fieldtype": "Data",
    "label": "Title"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "fieldname": "image_url",
+   "fieldtype": "Data",
+   "label": "Image URL",
+   "hidden": 1
+  },
+  {
+   "fieldname": "image_html",
+   "fieldtype": "HTML",
+   "label": "Image",
+   "in_list_view": 1
   },
   {
    "fieldname": "status",

@@ -11,6 +11,8 @@
   "marketplace_id",
   "buyer_username",
   "buyer_email",
+  "section_break_items",
+  "items",
   "column_break_totals",
   "order_total",
   "currency",
@@ -51,6 +53,17 @@
    "fieldname": "buyer_email",
    "fieldtype": "Data",
    "label": "Buyer Email"
+  },
+  {
+   "fieldname": "section_break_items",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "eBay Order Item"
   },
   {
    "fieldname": "column_break_totals",

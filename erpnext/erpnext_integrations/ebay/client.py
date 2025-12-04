@@ -75,8 +75,20 @@ class EbayClient:
 	def get_orders(self, **params: Any) -> dict[str, Any]:
 		return self.request("GET", "/sell/fulfillment/v1/order", params=params)
 
+	def get_order(self, order_id: str) -> dict[str, Any]:
+		return self.request("GET", f"/sell/fulfillment/v1/order/{order_id}")
+
 	def get_listings(self, **params: Any) -> dict[str, Any]:
 		return self.request("GET", "/sell/inventory/v1/inventory_item", params=params)
+
+	def get_inventory_item(self, sku: str) -> dict[str, Any]:
+		return self.request("GET", f"/sell/inventory/v1/inventory_item/{sku}")
+
+	def create_or_replace_inventory_item(self, sku: str, item_details: dict[str, Any]) -> None:
+		self.request("PUT", f"/sell/inventory/v1/inventory_item/{sku}", json=item_details, parse_json=False)
+
+	def delete_inventory_item(self, sku: str) -> None:
+		self.request("DELETE", f"/sell/inventory/v1/inventory_item/{sku}", parse_json=False)
 
 	def _maybe_json(self, response: requests.Response) -> Any:
 		try:
